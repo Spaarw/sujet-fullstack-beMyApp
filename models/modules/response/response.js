@@ -2,7 +2,6 @@
  * @author      Pierre Petit
  * @description HTTP RESPONSE MODULE
  * @date        26/06/2017
- * @copyright   Rezocean
  */
 
 "use strict";

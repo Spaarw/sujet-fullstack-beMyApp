@@ -2,7 +2,6 @@
  * @author Pierre Petit
  * @description EXPRESS SERVER MAIN FILE
  * @date 26/06/2017
- * @copyright Rezocean
  */
 
 "use strict";
@@ -22,10 +21,12 @@ var compression = require('compression');
 
 // #################################
 // PATH DECLARATION
-global.PATH_PUBLIC = "/www/";
-global.PATH_MODULES = "/models/modules";
-global.PATH_DB_MANAGERS = "/models/dbManagers";
-global.PATH_MIDDLEWARES = "/models/middlewares";
+global.PATH_CONFIGS = __dirname + "/models/configurations/";
+global.PATH_PUBLIC = __dirname + "/www/";
+global.PATH_MODULES = __dirname + "/models/modules";
+global.PATH_DB_MANAGERS = __dirname + "/models/dbManagers";
+global.PATH_MIDDLEWARES = __dirname + "/models/middlewares";
+global.PATH_ROUTES = __dirname + "/routes";
 // #################################
 
 
@@ -100,6 +101,13 @@ io.on('connection', function (socket) {
 	});
 
 });
+// #################################
+
+
+// #################################
+// GLOBAL HTTP STATUS CONFIGURATION
+require(PATH_ROUTES + "/searchEngine/router")(server ,io);
+require(PATH_ROUTES + "/conferences/router")(server, io);
 // #################################
 
 

@@ -1,6 +1,6 @@
 /**
  * @author      Pierre Petit
- * @description LOGS DATABASE MANAGER
+ * @description CONFERENCES DATABASE MANAGER
  * @date        26/06/2017
  */
 
@@ -16,7 +16,7 @@ var mongoose = require('mongoose');
  * */
 
 
-var logsSchema = new mongoose.Schema(require('./schema.js'));
+var conferencesSchema = new mongoose.Schema(require('./schema.js'));
 
 
 /*
@@ -26,7 +26,7 @@ var logsSchema = new mongoose.Schema(require('./schema.js'));
  * */
 
 
-require('./middlewares.js')(logsSchema);
+require('./middlewares.js')(conferencesSchema);
 
 
 /*
@@ -36,7 +36,7 @@ require('./middlewares.js')(logsSchema);
  * */
 
 
-require('./methods.js')(logsSchema);
+require('./methods.js')(conferencesSchema);
 
 
 /*
@@ -46,4 +46,4 @@ require('./methods.js')(logsSchema);
  * */
 
 
-module.exports = mongoose.model('Logs', logsSchema);
+module.exports = mongoose.model('Conferences', conferencesSchema);

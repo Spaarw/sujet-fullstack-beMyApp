@@ -2,7 +2,6 @@
  * @author      Pierre Petit
  * @description LOGS DATABASE MIDDLEWARES
  * @date        26/06/2017
- * @copyright   Rezocean
  */
 
 "use strict";

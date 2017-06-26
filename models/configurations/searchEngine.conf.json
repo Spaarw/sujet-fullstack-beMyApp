@@ -1,0 +1,9 @@
+{
+  "Conferences": {
+	"_fields"      : [
+	  {"name": "title", "type": "String", "operator": "+-", "default": "", "private": false},
+	  {"name": "description", "type": "String", "operator": "+-", "default": "", "private": false}
+	],
+	"_restrictions": null
+  }
+}

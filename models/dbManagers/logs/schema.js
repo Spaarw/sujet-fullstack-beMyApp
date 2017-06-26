@@ -2,7 +2,6 @@
  * @author      Pierre Petit
  * @description LOGS DATABASE SCHEMA
  * @date        26/06/2017
- * @copyright   Rezocean
  */
 
 "use strict";
@@ -14,7 +13,6 @@ module.exports = {
 	ipAddress: {type: String, required: false, default: null},
 	method: {type: String, required: false, default: null},
 	url: {type: String, required: false, default: null},
-	userAgent:{type:mongoose.Schema.Types.Mixed, required:false, default:null},
 	params: {type: mongoose.Schema.Types.Mixed, required: false, default: null},
 	responseTime: {type: Number, required: false, default: 0},
 	status: {type: Number, required: false, default: 0},

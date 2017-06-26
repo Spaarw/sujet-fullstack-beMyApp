@@ -2,7 +2,6 @@
  * @author      Pierre Petit
  * @description LOGS MIDDLEWARE
  * @date        26/06/2017
- * @copyright   Rezocean
  */
 
 "use strict";
@@ -18,9 +17,7 @@ module.exports = function (req, res, next) {
 	log.url = req.url;
 	log.method = req.method;
 	log.getParameters(req);
-	log.getUserAgentInfo(req);
 	log.ipAddress = Logs.getIpAddress(req);
-	log.params = log.getParameters(req);
 	log.save(function (err, newLog) {
 		if (err) {
 			response.send(res, HTTP_INTERNAL_ERROR, null, err);
