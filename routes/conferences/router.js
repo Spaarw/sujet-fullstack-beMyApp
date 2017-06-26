@@ -6,10 +6,14 @@
 
 "use strict";
 
+var moment = require('moment');
+
 var Response = require(PATH_MODULES + "/response/response");
 var Sockets = require(PATH_MODULES + "/sockets/sockets");
 
-module.exports = function(server, io) {
+var Conferences = require(PATH_DB_MANAGERS + "/conferences/manager");
+
+module.exports = function (server, io) {
 	var socket = new Sockets(io);
 
 
@@ -18,8 +22,20 @@ module.exports = function(server, io) {
 	 * Used to get all conferences
 	 * @param search
 	 */
-	server.get('/routes/conferences', function(req, res) {
-		// TODO : GET ALL CONFERENCES WITH SEARCH
+	server.get('/routes/conferences', function (req, res) {
+		Conferences.find({archived: false}, {
+			dateCreation: 1,
+			dateLastModification: 1,
+			title: 1,
+			dateStart: 1
+		}, function (err, conferences) {
+			if (err) {
+				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+			}
+			else {
+				Response.send(res, HTTP_SUCCESS, conferences);
+			}
+		});
 	});
 
 
@@ -27,8 +43,51 @@ module.exports = function(server, io) {
 	 * GET ROUTES CONFERENCES :CONFERENCEID
 	 * Used to get conference detail by id
 	 */
-	server.get('/routes/conferences/:conferenceId', function(req, res) {
-		// TODO : GET CONFERENCE DETAIL
+	server.get('/routes/conferences/:conferenceId', function (req, res) {
+		Conferences.findById({_id: req.params.conferenceId, archived: false}, function (err, conference) {
+			if (err) {
+				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+			}
+			else if (conference) {
+				Response.send(res, HTTP_SUCCESS, conference);
+			}
+			else {
+				Response.send(res, HTTP_FAILED, 'This conference does not exists');
+			}
+		});
+	});
+
+
+	/**
+	 * PUT ROUTES CONFERENCES
+	 * Used to create a new conference
+	 * @param dateStart
+	 * @param title
+	 * @param description
+	 */
+	server.put('/routes/conferences', function (req, res) {
+		if (req.body.dateStart && req.body.title && req.body.description) {
+			if (moment(req.body.dateStart).isValid()) {
+				var conference = new Conferences();
+				conference.dateStart = req.body.dateStart;
+				conference.title = req.body.title;
+				conference.description = req.body.description;
+				conference.save(function (err) {
+					if (err) {
+						Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+					}
+					else {
+						Response.send(res, HTTP_SUCCESS, conference);
+					}
+				});
+			}
+			else {
+				Response.send(res, HTTP_FAILED, 'Sorry, the date format [' + req.body.dateStart + '] is not valid');
+			}
+		}
+		else {
+			Response.send(res, HTTP_FAILED, 'To create a conferences, theses fields are required [dateStart, title, description]');
+		}
 	});
 
 
@@ -39,8 +98,38 @@ module.exports = function(server, io) {
 	 * @param title
 	 * @param description
 	 */
-	server.post('/routes/conferences/:conferenceId', function(req, res) {
-		// TODO : UPDATE CONFERENCES
+	server.post('/routes/conferences/:conferenceId', function (req, res) {
+		if (req.body.dateStart && req.body.title && req.body.description) {
+			if (moment(req.body.dateStart).isValid()) {
+				Conferences.findOne({_id: req.params.conferenceId, archived: false}, function (err, conference) {
+					if (err) {
+						Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+					}
+					else if (conference) {
+						conference.dateStart = req.body.dateStart;
+						conference.title = req.body.title;
+						conference.description = req.body.description;
+						conference.save(function (err) {
+							if (err) {
+								Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+							}
+							else {
+								Response.send(res, HTTP_SUCCESS, conference);
+							}
+						});
+					}
+					else {
+						Response.send(res, HTTP_FAILED, 'This conference does not exists');
+					}
+				});
+			}
+			else {
+				Response.send(res, HTTP_FAILED, 'Sorry, the date format [' + req.body.dateStart + '] is not valid');
+			}
+		}
+		else {
+			Response.send(res, HTTP_FAILED, 'To update conferences, theses fields are required [dateStart, title, description]');
+		}
 	});
 
 
@@ -48,7 +137,7 @@ module.exports = function(server, io) {
 	 * POST ROUTES COFERENCES CONFERENCEID LOGO
 	 * Used to update conference logo
 	 */
-	server.post('/routes/conferences/:conferenceId/logo', function(req, res) {
+	server.post('/routes/conferences/:conferenceId/logo', function (req, res) {
 		// TODO : UPDATE CONFERENCE LOGO
 	});
 
@@ -57,8 +146,19 @@ module.exports = function(server, io) {
 	 * DELETE ROUTES CONFERENCES :CONFERENCEID
 	 * Used to delete a conference by id
 	 */
-	server.delete('/routes/conferences/:conferenceId', function(req, res) {
-		// TODO : ASK CONFIRMATION
+	server.delete('/routes/conferences/:conferenceId', function (req, res) {
+		Conferences.findOne({_id: req.params.conferenceId, archived: false}, function (err, conference) {
+			if (err) {
+				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+			}
+			else if (conference) {
+				conference.archived = true;
+				Response.send(res, HTTP_SUCCESS, null);
+			}
+			else {
+				Response.send(res, HTTP_FAILED, 'This conference does not exists');
+			}
+		});
 	});
 
 };
