@@ -1,5 +1,5 @@
 {
-  "name"        : "sujet-fullstack-beMyApp",
+  "name"        : "sujet-fullstack-beMyApp-server",
   "private"     : false,
   "author"      : "Sparw",
   "dependencies": {
