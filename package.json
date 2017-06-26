@@ -1,0 +1,18 @@
+{
+  "name"        : "sujet-fullstack-beMyApp",
+  "private"     : false,
+  "author"      : "Sparw",
+  "dependencies": {
+	"express"                  : ">=4.14.0",
+	"express-session"          : ">=1.14.2",
+	"express-socket.io-session": ">=1.3.1",
+	"dotenv"                   : ">=2.0.0",
+	"body-parser"              : ">=1.15.2",
+	"fs"                       : ">0.0.1-security",
+	"moment"                   : ">=2.17.1",
+	"mongoose"                 : ">=4.3.3",
+	"connect-mongo"            : ">=1.3.2",
+	"helmet"                   : ">=3.5.0",
+	"compression"              : ">=1.6.2"
+  }
+}
