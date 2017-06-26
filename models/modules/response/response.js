@@ -26,7 +26,7 @@ module.exports = {
 		if (res.currentLogId) {
 			Logs.findById(res.currentLogId, function (err, log) {
 				if (err) {
-					res.status(HTTP_INTERNAL_ERROR).json(UNKNOWN_ERROR);
+					res.status(HTTP_INTERNAL_ERROR).json('An unknown error has been detected !');
 				}
 				else if (log) {
 					log.status = httpStatus;
@@ -42,7 +42,7 @@ module.exports = {
 					log.responseTime = Date.now() - log.date;
 					log.save(function (err, log) {
 						if (err) {
-							res.status(HTTP_INTERNAL_ERROR).json(UNKNOWN_ERROR);
+							res.status(HTTP_INTERNAL_ERROR).json('An unknown error has been detected !');
 						}
 						else {
 							res.status(httpStatus).json(response);

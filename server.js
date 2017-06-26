@@ -36,7 +36,7 @@ var connectionString = 'mongodb://' + process.env._dbHost + ':' + process.env._d
 var options = {
 	auth: {authdb: process.env._dbUserDatabase},
 	user: process.env._dbUser,
-	pass: process.env._dbPassword
+	pass: process.env._dbPassword,
 };
 var connection = mongoose.createConnection(connectionString, options);
 mongoose.connect(connectionString, options);
@@ -75,7 +75,6 @@ server.use(helmet());
 server.disable('x-powered-by'); // For security reason
 server.use(compression());
 // #################################
-
 
 // #################################
 // MIDDLEWARES DECLARATION

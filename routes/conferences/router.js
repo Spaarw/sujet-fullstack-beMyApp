@@ -44,7 +44,7 @@ module.exports = function (server, io) {
 	 * Used to get conference detail by id
 	 */
 	server.get('/routes/conferences/:conferenceId', function (req, res) {
-		Conferences.findById({_id: req.params.conferenceId, archived: false}, function (err, conference) {
+		Conferences.findOne({_id: req.params.conferenceId, archived: false}, function (err, conference) {
 			if (err) {
 				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
 			}
