@@ -10,9 +10,9 @@
         </button>
     </div>
     <div ng-repeat="conference in conferences">
-        <div class="conference" ng-click="openModalConferenceDetail(conference._id)">
-            <div class="title">{{conference.title}}</div>
-            <div class="data">{{conference.date}}</div>
+        <div class="conference">
+            <span class="title" ng-click="openModalConferenceDetail(conference._id)">{{conference.title}}</span>
+            <div class="date">{{conference.dateStart | date: 'dd/MM/yyyy HH:mm'}}</div>
             <div class="content">{{conference.description}}</div>
         </div>
     </div>

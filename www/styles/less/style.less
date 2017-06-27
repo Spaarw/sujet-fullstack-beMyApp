@@ -16,4 +16,21 @@ body {
 .conference {
   background:@conference-background;
   margin:@conference-margin;
+  padding:@conference-padding;
+  border:1px solid #DDD;
+  border-radius:5px;
+  position:relative;
+  .title {
+    font-size: 20px;
+    cursor:pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .content {
+
+  }
+  .date {
+    font-size:10px;
+  }
 }
