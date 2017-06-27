@@ -24,8 +24,7 @@ module.exports = function (server, io) {
 	 */
 	server.get('/routes/conferences', function (req, res) {
 		Conferences.find({archived: false}, {
-			dateCreation: 1,
-			dateLastModification: 1,
+			description:1,
 			title: 1,
 			dateStart: 1
 		}, function (err, conferences) {

@@ -5,12 +5,12 @@
         <button class="btn btn-success" ng-click="refreshConferences()">
             <i class="fa fa-refresh"></i>
         </button>
-        <button class="btn btn-success" ng-click="showConferenceModal()">
+        <button class="btn btn-success" ng-click="openModalConferenceDetail()">
             <i class="fa fa-plus"></i>
         </button>
     </div>
     <div ng-repeat="conference in conferences">
-        <div class="conference">
+        <div class="conference" ng-click="openModalConferenceDetail(conference._id)">
             <div class="title">{{conference.title}}</div>
             <div class="data">{{conference.date}}</div>
             <div class="content">{{conference.description}}</div>

@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <div ng-show="mode == 'CREATION'">Création d'une conférence</div>
+    <div ng-show="mode == 'MODIFICATION'">Détail d'une conférence</div>
+</div>
+
+<div class="modal-body">
+    <div class="input-group">
+        <span>Date</span>
+        <input type="date" class="form-control" ng-model="conference.dateStart" />
+    </div>
+    <div class="input-group">
+        <span>Titre</span>
+        <input type="text" class="form-control" ng-model="conference.title"/>
+    </div>
+    <div class="input-group">
+        <span>Description</span>
+        <textarea cols="30" rows="10" class="form-control" ng-model="conference.description"></textarea>
+    </div>
+    <div class="input-group">
+        <button class="btn btn-success" ng-click="sendData()">
+            <i class="fa fa-check"></i>
+            Valider
+        </button>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-danger" ng-click="close()">
+        <i class="fa fa-close"></i>
+    </button>
+</div>

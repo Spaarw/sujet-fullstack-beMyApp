@@ -7,24 +7,39 @@
 
 "use strict";
 
-app.controller('homeController', function($rootScope, $scope, restService) {
+app.controller('homeController', function ($rootScope, $scope, $uibModal, restService) {
 
 
 	/**
 	 * REFRESH CONFERENCES
 	 * Used to refresh all conferences
 	 */
-	$scope.refreshConferences = function() {
+	$scope.refreshConferences = function () {
 		$scope.conferences = null;
 		restService.get.conferences().then(function (response) {
-			$scope.conferences = response;
-			$scope.conferences = [
-				{title: 'Conférence Paris 12', description: 'RDV à paris 12 le 26 Mai 2019 !!', logo: ''},
-				{title: 'Conférence Paris 13', description: 'RDV à paris 13 le 29 Mai 2019 !!', logo: ''},
-				{title: 'Conférence Paris 13', description: 'RDV à paris 13 le 28 Mai 2019 !!', logo: ''}
-			];
+			$scope.conferences = response.data;
 		});
 	};
+
+
+	/**
+	 * OPEN MODAL CONFERENCE DETAIL
+	 * used to open modal conference detail
+	 * @param conferenceId
+	 */
+	$scope.openModalConferenceDetail = function (conferenceId) {
+		console.log(conferenceId);
+		$uibModal.open({
+			templateUrl: 'templates/modal.conferenceDetail.template.html',
+			controller: 'modalConferenceDetailController',
+			resolve: {
+				conferenceId: function () {
+					return conferenceId;
+				}
+			}
+		});
+	};
+
 
 	$scope.refreshConferences();
 
