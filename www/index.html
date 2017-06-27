@@ -1,10 +1,15 @@
 <!DOCTYPE html >
-<html lang="en" ng-app="app">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>sujet-fullstack-beMyApp</title>
 
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+
+    <link rel="stylesheet/less" type="text/css" href="styles/less/exports.less"/>
+    <script src="node_modules/less/dist/less.min.js"></script>
 
     <!-- ANGULAR DEPENDENCIES -->
     <script src="node_modules/angular/angular.min.js"></script>
@@ -12,12 +17,19 @@
 
     <script src="node_modules/moment/min/moment.min.js"></script>
     <script src="node_modules/angular-moment/angular-moment.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+
     <script src="/socket.io/socket.io.js"></script>
 
+    <!-- BMA DEPENDENCIES -->
     <script src="app.js"></script>
+    <script src="controllers/home.controller.js"></script>
+    <script src="services/rest.service.js"></script>
+    <script src="services/socket.service.js"></script>
+
 
 </head>
-<body>
-    test
+<body ng-app="app">
+    <ng-include ng-controller="homeController" src="'templates/home.template.html'"></ng-include>
 </body>
 </html>

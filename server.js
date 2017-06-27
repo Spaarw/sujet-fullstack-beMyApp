@@ -16,6 +16,7 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(expressSession);
 var helmet = require('helmet');
 var compression = require('compression');
+require(__dirname + '/models/toolsBox/toolsBox');
 // #################################
 
 
@@ -36,7 +37,7 @@ var connectionString = 'mongodb://' + process.env._dbHost + ':' + process.env._d
 var options = {
 	auth: {authdb: process.env._dbUserDatabase},
 	user: process.env._dbUser,
-	pass: process.env._dbPassword,
+	pass: process.env._dbPassword
 };
 var connection = mongoose.createConnection(connectionString, options);
 mongoose.connect(connectionString, options);
