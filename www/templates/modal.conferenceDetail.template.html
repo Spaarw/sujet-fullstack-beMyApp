@@ -6,11 +6,11 @@
 <div class="modal-body">
     <div class="input-group" ng-show="mode == 'MODIFICATION'">
         <span>Date de Création</span>
-        <input type="date" class="form-control" value="{{conference.dateCreation}}" disabled/>
+        <input type="date" class="form-control" ng-model="conference.dateCreation" disabled/>
     </div>
     <div class="input-group" ng-show="mode == 'MODIFICATION'">
         <span>Date de dernière modification</span>
-        <input type="date" class="form-control" value="{{conference.dateLastModification}}" disabled/>
+        <input type="date" class="form-control" ng-model="conference.dateLastModification" disabled/>
     </div>
     <div class="input-group">
         <span>Date de début</span>

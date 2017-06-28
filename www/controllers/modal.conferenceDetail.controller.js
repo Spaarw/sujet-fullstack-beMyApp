@@ -15,6 +15,9 @@ app.controller('modalConferenceDetailController', function ($rootScope, $scope, 
 	if ($scope.mode == 'MODIFICATION') {
 		restService.get.conferencesDetail(conferenceId).then(function (response) {
 			$scope.conference = response.data;
+			$scope.conference.dateCreation = new Date($scope.conference.dateCreation);
+			$scope.conference.dateLastModification = new Date($scope.conference.dateLastModification);
+			$scope.conference.dateStart = new Date($scope.conference.dateStart);
 		});
 	}
 	else {
