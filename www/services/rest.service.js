@@ -81,5 +81,18 @@ app.service('restService', function($rootScope, $http) {
 		}, handleHttpError);
 	};
 
+
+	/**
+	 * DELETE CONFERENCES
+	 * Used to delete a conference by ID
+	 * @param conferenceId
+	 * @returns {*|Promise|Promise.<TResult>}
+	 */
+	service.delete.conferences = function(conferenceId) {
+		return $http.delete('/routes/conferences/' + conferenceId).then(function(response) {
+			return response.data;
+		}, handleHttpError);
+	};
+
 	return service;
 });

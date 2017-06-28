@@ -115,6 +115,7 @@ require(PATH_ROUTES + "/conferences/router")(server, io);
 // GLOBAL HTTP STATUS CONFIGURATION
 global.HTTP_SUCCESS = 200;
 global.HTTP_FAILED = 424;
+global.HTTP_CANCELED = 499;
 global.HTTP_INTERNAL_ERROR = 500;
 // #################################
 

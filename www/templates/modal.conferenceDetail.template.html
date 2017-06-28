@@ -4,9 +4,17 @@
 </div>
 
 <div class="modal-body">
+    <div class="input-group" ng-show="mode == 'MODIFICATION'">
+        <span>Date de Création</span>
+        <input type="date" class="form-control" value="{{conference.dateCreation}}" disabled/>
+    </div>
+    <div class="input-group" ng-show="mode == 'MODIFICATION'">
+        <span>Date de dernière modification</span>
+        <input type="date" class="form-control" value="{{conference.dateLastModification}}" disabled/>
+    </div>
     <div class="input-group">
-        <span>Date</span>
-        <input type="date" class="form-control" ng-model="conference.dateStart" />
+        <span>Date de début</span>
+        <input type="date" class="form-control" ng-model="conference.dateStart"/>
     </div>
     <div class="input-group">
         <span>Titre</span>
@@ -16,15 +24,16 @@
         <span>Description</span>
         <textarea cols="30" rows="10" class="form-control" ng-model="conference.description"></textarea>
     </div>
-    <div class="input-group">
-        <button class="btn btn-success" ng-click="sendData()">
-            <i class="fa fa-check"></i>
-            Valider
-        </button>
-    </div>
 </div>
 
 <div class="modal-footer">
+    <button class="btn btn-success" ng-disabled="!conference.dateStart || !conference.title || !conference.description"
+            ng-click="sendData()">
+        <i class="fa fa-check"></i>
+    </button>
+    <button ng-show="mode == 'MODIFICATION'" class="btn btn-danger" ng-click="delete()">
+        <i class="fa fa-trash"></i>
+    </button>
     <button class="btn btn-danger" ng-click="close()">
         <i class="fa fa-close"></i>
     </button>

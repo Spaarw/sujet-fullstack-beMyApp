@@ -23,6 +23,7 @@ module.exports = {
 			motif: httpStatus > HTTP_SUCCESS ? data : null,
 			data: httpStatus == HTTP_SUCCESS ? data : null
 		};
+		if (error) console.log(error);
 		if (res.currentLogId) {
 			Logs.findById(res.currentLogId, function (err, log) {
 				if (err) {

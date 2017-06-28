@@ -7,18 +7,18 @@
 
 "use strict";
 
-app.controller('modalConferenceDetailController', function($rootScope, $scope, $uibModalInstance, restService, conferenceId) {
+app.controller('modalConferenceDetailController', function ($rootScope, $scope, $uibModalInstance, restService, conferenceId) {
 
 	$scope.mode = conferenceId ? 'MODIFICATION' : 'CREATION';
 
 	console.log(conferenceId, $scope.mode);
 	if ($scope.mode == 'MODIFICATION') {
-		restService.get.conferencesDetail(conferenceId).then(function(response) {
+		restService.get.conferencesDetail(conferenceId).then(function (response) {
 			$scope.conference = response.data;
 		});
 	}
 	else {
-		$scope.conferece = {dateStart:"", title:"", description:""};
+		$scope.conferece = {dateStart: "", title: "", description: ""};
 	}
 
 
@@ -26,9 +26,9 @@ app.controller('modalConferenceDetailController', function($rootScope, $scope, $
 	 * SEND DATE
 	 * Used to create or update a conference
 	 */
-	$scope.sendData = function() {
+	$scope.sendData = function () {
 		var _httpMethod = $scope.mode == 'CREATION' ? 'put' : 'post';
-		restService[_httpMethod].conferences($scope.conference).then(function(response) {
+		restService[_httpMethod].conferences($scope.conference).then(function (response) {
 			if (response) {
 				$scope.close();
 			}
@@ -37,10 +37,25 @@ app.controller('modalConferenceDetailController', function($rootScope, $scope, $
 
 
 	/**
+	 * DELETE
+	 * Used to delete a conference
+	 */
+	$scope.delete = function () {
+		if ($scope.mode == 'MODIFICATION') {
+			restService.delete.conferences(conferenceId).then(function(response) {
+				if (response) {
+					$scope.close();
+				}
+			});
+		}
+	};
+
+
+	/**
 	 * CLOSE
 	 * Used to close modal instance
 	 */
-	$scope.close = function() {
+	$scope.close = function () {
 		$uibModalInstance.close();
 	}
 

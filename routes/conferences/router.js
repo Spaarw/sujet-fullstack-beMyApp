@@ -27,7 +27,7 @@ module.exports = function (server, io) {
 			description:1,
 			title: 1,
 			dateStart: 1
-		}, function (err, conferences) {
+		}).sort({dateStart:-1}).exec(function (err, conferences) {
 			if (err) {
 				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
 			}
@@ -151,8 +151,25 @@ module.exports = function (server, io) {
 				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
 			}
 			else if (conference) {
-				conference.archived = true;
-				Response.send(res, HTTP_SUCCESS, null);
+				socket.askConfirmation(Object.get(req, 'headers.sid'), 'Êtes-vous sûr de vouloir supprimer cette conférence ?', function(err, confirm) {
+					if (err) {
+						Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+					}
+					else if (confirm) {
+						conference.archived = true;
+						conference.save(function(err) {
+							if (err) {
+								Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+							}
+							else {
+								Response.send(res, HTTP_SUCCESS, null);
+							}
+						})
+					}
+					else {
+						Response.send(res, HTTP_CANCELED, null);
+					}
+				});
 			}
 			else {
 				Response.send(res, HTTP_FAILED, 'This conference does not exists');
