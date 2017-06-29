@@ -60,6 +60,6 @@ app.controller('modalConferenceDetailController', function ($rootScope, $scope, 
 	 */
 	$scope.close = function () {
 		$uibModalInstance.close();
-	}
+	};
 
 });

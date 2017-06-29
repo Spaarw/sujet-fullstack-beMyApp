@@ -1,36 +1,65 @@
+@import "config";
+
+// BODY
 body {
-  background:@body-background;
-  color:@body-color;
-  margin:@body-margin;
+  background: @body_background;
+  color: @body_color;
+  margin: @body_margin;
 }
 
+// TOOLBAR
 .toolbar {
-  background:@toolbar-background;
-  color:@toolbar-color;
-  padding:@toolbar-padding;
+  background: @toolbar_background;
+  color: @toolbar_color;
+  padding: @toolbar_padding;
   .btn {
-    border-radius: @toolbar-btn-border-radius;
+    border-radius: @toolbar-btn_border-radius;
   }
 }
 
+// CONFERENCE
 .conference {
-  background:@conference-background;
-  margin:@conference-margin;
-  padding:@conference-padding;
-  border:1px solid #DDD;
-  border-radius:5px;
-  position:relative;
+  background: @conference_background;
+  margin: @conference_margin;
+  padding: @conference_padding;
+  border: @conference_border;
+  border-radius: @conference_border-radius;
+  position: @conference_position;
   .title {
-    font-size: 20px;
-    cursor:pointer;
+    font-size: @conference-title_font-size;
+    cursor: @conference-title_cursor;
     &:hover {
-      text-decoration: underline;
+      text-decoration: @conference-title-HOVER_text-decoration;
     }
   }
   .content {
-
   }
   .date {
-    font-size:10px;
+    font-size: @conference-date_font-size;
+  }
+}
+
+// MODAL-DIALOG
+.modal-dialog {
+  border-radius: @modal-dialog_border-radius;
+  .modal-content {
+    box-shadow: @modal-dialog-modal-content_box-shadow;
+    border-radius: @modal-dialog-modal-content_border-radius;
+    .modal-header {
+      background: @modal-dialog-modal-content-modal-header_background;
+      color: @modal-dialog-modal-content-modal-header_color;
+      font-size: @modal-dialog-modal-content-modal-header_font-size;
+      border-radius: @modal-dialog-modal-content-modal-header_border-radius;
+      border: @modal-dialog-modal-content-modal-header_border;
+    }
+    .modal-body {
+    }
+    .modal-footer {
+      background: @modal-dialog-modal-content-modal-footer_background;
+      border-radius: @modal-dialog-modal-content-modal-footer_border-radius;
+      .btn {
+        border-radius: @modal-dialog-modal-content-modal-footer-btn_border-radius;
+      }
+    }
   }
 }

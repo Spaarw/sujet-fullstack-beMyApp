@@ -39,4 +39,6 @@ app.service('socketService', function($rootScope, $http, $uibModal) {
 		});
 	});
 
+	return socket;
+
 });
