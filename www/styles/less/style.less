@@ -63,3 +63,14 @@ body {
     }
   }
 }
+
+// FORM-CONTROL
+.form-control {
+  border: @form-control_border;
+  border-radius: @form-control_border-radius;
+  box-shadow: @form-control_box-shadow;
+  &:focus {
+    border: @form-control-FOCUS_border;
+    box-shadow: @form-control-FOCUS_box-shadow;
+  }
+}
