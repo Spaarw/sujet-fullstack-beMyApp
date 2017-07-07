@@ -63,7 +63,7 @@ app.controller('modalConferenceDetailController', function ($rootScope, $scope, 
 	 * @param file
 	 */
 	$scope.uploadLogo = function(file) {
-		if (file) {
+		if ($scope.mode == 'MODIFICATION' && file) {
 			restService.post.conferencesLogo(conferenceId, file).then(function(response) {
 				if (response) {
 					$scope.getDetail();

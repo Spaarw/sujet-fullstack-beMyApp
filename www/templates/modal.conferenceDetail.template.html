@@ -12,7 +12,7 @@
         <span>Date de dernière modification</span>
         <input type="date" class="form-control" ng-model="conference.dateLastModification" disabled/>
     </div>
-    <div class="input-group">
+    <div class="input-group" ng-show="mode == 'MODIFICATION'">
         <img src="styles/images/{{conference.logo}}" alt="LOGO">
         <button class="btn btn-success" ngf-select ngf-change="uploadLogo($file)" ngf-multiple="false">
             <i class="fa fa-upload"></i>
