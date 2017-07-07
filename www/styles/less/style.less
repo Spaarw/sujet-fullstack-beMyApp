@@ -26,7 +26,9 @@ body {
   border-radius: @conference_border-radius;
   position: @conference_position;
   .logo {
-    img { max-height:@conference-logo-img_max-height; }
+    img {
+      max-height: @conference-logo-img_max-height;
+    }
   }
   .title {
     font-size: @conference-title_font-size;
@@ -36,6 +38,12 @@ body {
     }
   }
   .content {
+    pre {
+      border: @conference-content-pre_border;
+      border-radius: @conference-content-pre_border-radius;
+      padding: @conference-content-pre_padding;
+      white-space: @conference-content-pre_white-space;
+    }
   }
   .date {
     font-size: @conference-date_font-size;
@@ -68,12 +76,19 @@ body {
 }
 
 // FORM-CONTROL
-.form-control {
-  border: @form-control_border;
-  border-radius: @form-control_border-radius;
-  box-shadow: @form-control_box-shadow;
-  &:focus {
-    border: @form-control-FOCUS_border;
-    box-shadow: @form-control-FOCUS_box-shadow;
+.input-group {
+  width: @input-group_width;
+  margin: @input-group_margin;
+  img {
+    max-height: @input-group-img_max-height;
+  }
+  .form-control {
+    border: @input-group-form-control_border;
+    border-radius: @input-group-form-control_border-radius;
+    box-shadow: @input-group-form-control_box-shadow;
+    &:focus {
+      border: @input-group-form-control-FOCUS_border;
+      box-shadow: @input-group-form-control-FOCUS_box-shadow;
+    }
   }
 }

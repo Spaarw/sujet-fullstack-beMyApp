@@ -16,7 +16,9 @@
             </div>
             <span class="title" ng-click="openModalConferenceDetail(conference._id)">{{conference.title}}</span>
             <div class="date">{{conference.dateStart | date: 'dd/MM/yyyy HH:mm'}}</div>
-            <div class="content">{{conference.description}}</div>
+            <div class="content">
+                <pre>{{conference.description}}</pre>
+            </div>
         </div>
     </div>
 
