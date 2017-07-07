@@ -7,22 +7,22 @@
 
 "use strict";
 
-app.service('restService', function($rootScope, $http) {
+app.service('restService', function ($rootScope, $http, Upload) {
 
-	var handleHttpError = function(error) {
+	var handleHttpError = function (error) {
 		console.error(error);
 		return null;
 	};
 
-	var service = {get:{}, post:{}, put:{}, delete:{}};
+	var service = {get: {}, post: {}, put: {}, delete: {}};
 
 	/**
 	 * GET CONFERENCES
 	 * Used to get all conferences
 	 * @returns {Promise.<TResult>|Promise|*}
 	 */
-	service.get.conferences = function() {
-		return $http.get('/routes/conferences').then(function(response) {
+	service.get.conferences = function () {
+		return $http.get('/routes/conferences').then(function (response) {
 			return response.data;
 		}, handleHttpError);
 	};
@@ -34,8 +34,8 @@ app.service('restService', function($rootScope, $http) {
 	 * @param conferenceId
 	 * @returns {Promise.<TResult>|Promise|*}
 	 */
-	service.get.conferencesDetail = function(conferenceId) {
-		return $http.get('/routes/conferences/' + conferenceId).then(function(response) {
+	service.get.conferencesDetail = function (conferenceId) {
+		return $http.get('/routes/conferences/' + conferenceId).then(function (response) {
 			return response.data;
 		}, handleHttpError);
 	};
@@ -50,12 +50,12 @@ app.service('restService', function($rootScope, $http) {
 	 * @param conference.description
 	 * @returns {Promise.<TResult>|Promise|*}
 	 */
-	service.put.conferences = function(conference) {
+	service.put.conferences = function (conference) {
 		return $http.put('/routes/conferences', {
-			dateStart:conference.dateStart,
-			title:conference.title,
-			description:conference.description
-		}).then(function(response) {
+			dateStart: conference.dateStart,
+			title: conference.title,
+			description: conference.description
+		}).then(function (response) {
 			return response.data;
 		}, handleHttpError);
 	};
@@ -71,12 +71,30 @@ app.service('restService', function($rootScope, $http) {
 	 * @param conference.description
 	 * @returns {Promise.<TResult>|Promise|*}
 	 */
-	service.post.conferences = function(conference) {
+	service.post.conferences = function (conference) {
 		return $http.post('/routes/conferences/' + conference._id, {
-			dateStart:conference.dateStart,
-			title:conference.title,
-			description:conference.description
-		}).then(function(response) {
+			dateStart: conference.dateStart,
+			title: conference.title,
+			description: conference.description
+		}).then(function (response) {
+			return response.data;
+		}, handleHttpError);
+	};
+
+
+	/**
+	 * POST CONFERENCES LOGO
+	 * Used to update conference logo
+	 * @param conferenceId
+	 * @param file
+	 * @returns {Promise|Promise.<TResult>|*}
+	 */
+	service.post.conferencesLogo = function (conferenceId, file) {
+		return Upload.upload({
+			url: '/routes/conferences/' + conferenceId + '/logo',
+			method: 'POST',
+			file: file
+		}).then(function (response) {
 			return response.data;
 		}, handleHttpError);
 	};
@@ -88,8 +106,8 @@ app.service('restService', function($rootScope, $http) {
 	 * @param conferenceId
 	 * @returns {*|Promise|Promise.<TResult>}
 	 */
-	service.delete.conferences = function(conferenceId) {
-		return $http.delete('/routes/conferences/' + conferenceId).then(function(response) {
+	service.delete.conferences = function (conferenceId) {
+		return $http.delete('/routes/conferences/' + conferenceId).then(function (response) {
 			return response.data;
 		}, handleHttpError);
 	};

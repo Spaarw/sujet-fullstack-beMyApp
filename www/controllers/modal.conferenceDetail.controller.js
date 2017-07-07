@@ -11,14 +11,17 @@ app.controller('modalConferenceDetailController', function ($rootScope, $scope, 
 
 	$scope.mode = conferenceId ? 'MODIFICATION' : 'CREATION';
 
-	console.log(conferenceId, $scope.mode);
-	if ($scope.mode == 'MODIFICATION') {
+	$scope.getDetail = function() {
 		restService.get.conferencesDetail(conferenceId).then(function (response) {
 			$scope.conference = response.data;
 			$scope.conference.dateCreation = new Date($scope.conference.dateCreation);
 			$scope.conference.dateLastModification = new Date($scope.conference.dateLastModification);
 			$scope.conference.dateStart = new Date($scope.conference.dateStart);
 		});
+	};
+
+	if ($scope.mode == 'MODIFICATION') {
+		$scope.getDetail();
 	}
 	else {
 		$scope.conferece = {dateStart: "", title: "", description: ""};
@@ -48,6 +51,22 @@ app.controller('modalConferenceDetailController', function ($rootScope, $scope, 
 			restService.delete.conferences(conferenceId).then(function(response) {
 				if (response) {
 					$scope.close();
+				}
+			});
+		}
+	};
+
+
+	/**
+	 * UPLOAD FILE
+	 * Used to upload file
+	 * @param file
+	 */
+	$scope.uploadLogo = function(file) {
+		if (file) {
+			restService.post.conferencesLogo(conferenceId, file).then(function(response) {
+				if (response) {
+					$scope.getDetail();
 				}
 			});
 		}

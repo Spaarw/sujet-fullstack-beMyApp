@@ -11,6 +11,9 @@
     </div>
     <div ng-repeat="conference in conferences">
         <div class="conference">
+            <div class="logo">
+                <img src="styles/images/{{conference.logo}}" alt="LOGO">
+            </div>
             <span class="title" ng-click="openModalConferenceDetail(conference._id)">{{conference.title}}</span>
             <div class="date">{{conference.dateStart | date: 'dd/MM/yyyy HH:mm'}}</div>
             <div class="content">{{conference.description}}</div>

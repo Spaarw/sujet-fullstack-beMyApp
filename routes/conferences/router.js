@@ -26,7 +26,8 @@ module.exports = function (server, io) {
 		Conferences.find({archived: false}, {
 			description:1,
 			title: 1,
-			dateStart: 1
+			dateStart: 1,
+			logo:1
 		}).sort({dateStart:-1}).exec(function (err, conferences) {
 			if (err) {
 				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
@@ -133,11 +134,36 @@ module.exports = function (server, io) {
 
 
 	/**
-	 * POST ROUTES COFERENCES CONFERENCEID LOGO
+	 * POST ROUTES CONFERENCES :CONFERENCEID LOGO
 	 * Used to update conference logo
 	 */
 	server.post('/routes/conferences/:conferenceId/logo', function (req, res) {
-		// TODO : UPDATE CONFERENCE LOGO
+		Conferences.findOne({_id: req.params.conferenceId, archived: false}, function (err, conference) {
+			if (err) {
+				Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+			}
+			else if (conference) {
+				Conferences.uploader(req, res, function(err) {
+					if (err) {
+						Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+					}
+					else if (req.file) {
+						conference.logo = req.file.filename;
+						conference.save(function(err) {
+							if (err) {
+								Response.send(res, HTTP_INTERNAL_ERROR, 'An unknown error has been detected !', err);
+							}
+							else {
+								Response.send(res, HTTP_SUCCESS, null);
+							}
+						});
+					}
+				});
+			}
+			else {
+				Response.send(res, HTTP_FAILED, 'This conference does not exists');
+			}
+		});
 	});
 
 

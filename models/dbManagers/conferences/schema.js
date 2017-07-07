@@ -12,6 +12,6 @@ module.exports = {
 	dateStart: {type: Date, required: false, default: Date.now},
 	title: {type: String, required: false, default: null},
 	description: {type: String, required: false, default: null},
-	logo: {type: String, required: false, default: "/styles/images/default_conference.png"},
+	logo: {type: String, required: false, default: "default_conference.png"},
 	archived: {type: Boolean, required: false, default: false}
 };

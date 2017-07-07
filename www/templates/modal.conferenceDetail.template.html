@@ -13,6 +13,12 @@
         <input type="date" class="form-control" ng-model="conference.dateLastModification" disabled/>
     </div>
     <div class="input-group">
+        <img src="styles/images/{{conference.logo}}" alt="LOGO">
+        <button class="btn btn-success" ngf-select ngf-change="uploadLogo($file)" ngf-multiple="false">
+            <i class="fa fa-upload"></i>
+        </button>
+    </div>
+    <div class="input-group">
         <span>Date de début</span>
         <input type="date" class="form-control" ng-model="conference.dateStart"/>
     </div>
